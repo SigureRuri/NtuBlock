@@ -1,0 +1,21 @@
+blocks:
+  barrier:
+    tool:
+      break: barrier
+      visible: barrier
+    drops:
+      barrier: 75.00
+    particle:
+      show: true
+      updateInterval: 20
+      renderDistance: 10
+  light:
+    tool:
+      break: light
+      visible: light
+    drops:
+      light: 75.00
+    particle:
+      show: true
+      updateInterval: 20
+      renderDistance: 10
