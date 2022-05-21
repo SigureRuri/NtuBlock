@@ -31,6 +31,7 @@ class BlockListener : Listener {
             with(block.world) {
                 blockOption.drops
                     .map {
+                        // 100を超えている場合は、百の位分のアイテムを確定でドロップして、%(演算子) 100した確率で追加で一つドロップする
                         it.key to (it.value.toInt() / 100) + if (Math.random() * 100 < it.value % 100) 1 else 0
                     }
                     .filterNot { it.second == 0 }
