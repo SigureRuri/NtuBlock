@@ -1,11 +1,15 @@
 package com.github.sigureruri.ntublock.config
 
 import org.bukkit.Material
+import org.bukkit.configuration.MemoryConfiguration
 import org.bukkit.configuration.file.FileConfiguration
 
 class BlockOptionsLoader(private val config: FileConfiguration) {
     @Throws(IllegalStateException::class)
     fun load(): Set<BlockOption> {
+        // 値が正常に設定されていない場合でもデフォルトの値を読み込み、正常に動作しているように見えるのを防ぐ
+        config.setDefaults(MemoryConfiguration())
+
         val blocksSection = config.getConfigurationSection("blocks") ?: throw IllegalStateException("ブロック設定が存在していません。")
         val blockOptions = blocksSection.getKeys(false).map { stringBlock ->
             val blockSection = blocksSection.getConfigurationSection(stringBlock) ?: throw IllegalStateException("$stringBlock の設定の書式が正しくありません。")
