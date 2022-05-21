@@ -1,16 +1,24 @@
 blocks:
+  # 設定するブロック(追加可能)
+  # 一覧はこちら　https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
   barrier:
     tool:
+      # 破壊に使用するブロック
       break: barrier
+      # 表示に使用するブロック
       visible: barrier
     drops:
+      # ドロップするアイテムとその確率(複数指定可能)
       barrier: 75.00
     particle:
       show: true
+      # パーティクルの更新間隔(tick)
       updateInterval: 20
+      # パーティクルを表示する距離(block)　値を大きくするほど指数関数的に負荷が増加する
       renderDistance: 10
   light:
     tool:
+      # Minecraftの仕様上、ライトブロックのbreakToolはライトブロックでなければならない
       break: light
       visible: light
     drops:
