@@ -8,33 +8,22 @@ import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
-import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
-import org.bukkit.event.block.Action
-import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.EquipmentSlot
+import org.bukkit.event.block.BlockDamageEvent
 import org.bukkit.inventory.ItemStack
 
 class BlockListener : Listener {
-    @EventHandler(priority = EventPriority.MONITOR)
-    fun onInteractBlock(event: PlayerInteractEvent) {
-        if (event.useItemInHand() == Event.Result.DENY || event.useInteractedBlock() == Event.Result.DENY) return
-
-        if (event.action != Action.LEFT_CLICK_BLOCK) return
-        if (event.hand != EquipmentSlot.HAND) return
-
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onDamageBlock(event: BlockDamageEvent) {
         if (event.player.gameMode != GameMode.SURVIVAL) return
 
-        if (!event.hasItem()) return
-        if (!event.hasBlock()) return
-
-        val item = event.item!!
-        val block = event.clickedBlock!!
+        val itemInHand = event.itemInHand
+        val block = event.block
 
         NtuBlock.blockOptions.forEach { blockOption ->
-            if (blockOption.breakTool != item.type) return@forEach
+            if (blockOption.breakTool != itemInHand.type) return@forEach
             if (blockOption.block != block.type) return@forEach
 
             block.type = Material.AIR
