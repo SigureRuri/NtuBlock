@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class NtuBlock : JavaPlugin() {
     lateinit var blockOptions: Set<BlockOption>
+        private set
 
     override fun onEnable() {
         saveDefaultConfig()
