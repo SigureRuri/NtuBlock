@@ -35,8 +35,4 @@ class NtuBlock : JavaPlugin() {
 
         EveryTickTask().runTaskTimer(this, 1L, 1L)
     }
-
-    override fun onDisable() {
-        // Plugin shutdown logic
-    }
 }
