@@ -1,0 +1,7 @@
+name: NtuBlock
+version: '${version}'
+main: com.github.sigureruri.ntublock.NtuBlock
+api-version: 1.18
+authors: [ SigureRuri ]
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:1.6.21
