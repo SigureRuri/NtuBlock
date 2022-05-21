@@ -17,8 +17,10 @@ class ParticleTask(private val player: Player, private val blockOption: BlockOpt
                 (-renderDistance..renderDistance).map { it + location.blockZ }.forEach { z ->
                     val searchedLocation = Location(location.world, x.toDouble(), y.toDouble(), z.toDouble())
                     if (searchedLocation.block.type == blockOption.block) {
-                        val locationForParticle = searchedLocation.add(0.5, 0.5, 0.5)
-                        player.spawnParticle(Particle.BLOCK_MARKER, locationForParticle, 1, searchedLocation.block.blockData)
+                        if (player.hasPermission("ntublock.particle.${blockOption.block.toString().lowercase()}")) {
+                            val locationForParticle = searchedLocation.add(0.5, 0.5, 0.5)
+                            player.spawnParticle(Particle.BLOCK_MARKER, locationForParticle, 1, searchedLocation.block.blockData)
+                        }
                     }
                 }
             }

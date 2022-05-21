@@ -26,6 +26,8 @@ class BlockListener : Listener {
             if (blockOption.breakTool != itemInHand.type) return@forEach
             if (blockOption.block != block.type) return@forEach
 
+            if (!event.player.hasPermission("ntublock.break.${blockOption.block.toString().lowercase()}")) return@forEach
+
             block.type = Material.AIR
 
             with(block.world) {
