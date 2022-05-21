@@ -2,11 +2,14 @@ package com.github.sigureruri.ntublock
 
 import com.github.sigureruri.ntublock.config.BlockOption
 import com.github.sigureruri.ntublock.config.BlockOptionsLoader
+import com.github.sigureruri.ntublock.listener.BlockListener
 import org.bukkit.plugin.java.JavaPlugin
 
 class NtuBlock : JavaPlugin() {
-    lateinit var blockOptions: Set<BlockOption>
-        private set
+    companion object {
+        lateinit var blockOptions: Set<BlockOption>
+            private set
+    }
 
     override fun onEnable() {
         saveDefaultConfig()
@@ -20,6 +23,8 @@ class NtuBlock : JavaPlugin() {
                 return
             }
         )
+
+        server.pluginManager.registerEvents(BlockListener(), this)
     }
 
     override fun onDisable() {
