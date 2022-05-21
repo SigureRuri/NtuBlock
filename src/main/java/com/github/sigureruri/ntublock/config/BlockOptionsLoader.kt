@@ -13,34 +13,34 @@ class BlockOptionsLoader(private val config: FileConfiguration) {
             val blockMaterial = getMaterialFromString(stringBlock)
 
             val toolSection =
-                blockSection.getConfigurationSection("tool") ?: throw IllegalStateException("$stringBlock のツールが指定されていません。")
+                blockSection.getConfigurationSection("tool") ?: throw IllegalStateException("$stringBlock のツールが正しく指定されていません。")
 
             val stringBreakTool =
-                toolSection.getString("break") ?: throw IllegalStateException("$stringBlock の破壊ツールが指定されていません。")
+                toolSection.getString("break") ?: throw IllegalStateException("$stringBlock の破壊ツールが正しく指定されていません。")
             val breakTool = getMaterialFromString(stringBreakTool)
 
             val stringVisible =
-                toolSection.getString("visible") ?: throw IllegalStateException("$stringBlock の表示ツールが指定されていません。")
+                toolSection.getString("visible") ?: throw IllegalStateException("$stringBlock の表示ツールが正しく指定されていません。")
             val visibleTool = getMaterialFromString(stringVisible)
 
-            val dropsSection = blockSection.getConfigurationSection("drops") ?: throw IllegalStateException("$stringBlock のドロップが指定されていません。")
+            val dropsSection = blockSection.getConfigurationSection("drops") ?: throw IllegalStateException("$stringBlock のドロップが正しく指定されていません。")
             val drops = dropsSection.getKeys(false).associate { stringDropMaterial ->
                 val material = getMaterialFromString(stringDropMaterial)
                 val probability =
                     if (dropsSection.isDouble(stringDropMaterial)) {
                         dropsSection.getDouble(stringDropMaterial)
                     } else {
-                        throw IllegalStateException("$stringBlock のドロップ(${stringDropMaterial})の確率が指定されていません。")
+                        throw IllegalStateException("$stringBlock のドロップ(${stringDropMaterial})の確率が正しく指定されていません。")
                     }
                 Pair(material, probability)
             }
 
-            val particleSection = blockSection.getConfigurationSection("particle") ?: throw IllegalStateException("$stringBlock のパーティクル設定が指定されていません。")
+            val particleSection = blockSection.getConfigurationSection("particle") ?: throw IllegalStateException("$stringBlock のパーティクル設定が正しく指定されていません。")
             val showParticle =
                 if (particleSection.isBoolean("show")) {
                     particleSection.getBoolean("show")
                 } else {
-                    throw IllegalStateException("$stringBlock のパーティクル表示設定が指定されていません。")
+                    throw IllegalStateException("$stringBlock のパーティクル表示設定が正しく指定されていません。")
                 }
             val particleOption =
                 if (showParticle) {
@@ -48,13 +48,13 @@ class BlockOptionsLoader(private val config: FileConfiguration) {
                         if (particleSection.isInt("updateInterval")) {
                             particleSection.getInt("updateInterval")
                         } else {
-                            throw IllegalStateException("$stringBlock のパーティクル設定(updateInterval)が指定されていません。")
+                            throw IllegalStateException("$stringBlock のパーティクル設定(updateInterval)が正しく指定されていません。")
                         }
                     val renderDistance =
                         if (particleSection.isInt("renderDistance")) {
                             particleSection.getInt("renderDistance")
                         } else {
-                            throw IllegalStateException("$stringBlock のパーティクル設定(renderDistance)が指定されていません。")
+                            throw IllegalStateException("$stringBlock のパーティクル設定(renderDistance)が正しく指定されていません。")
                         }
 
                     BlockOption.ParticleOption.Show(updateInterval, renderDistance)
